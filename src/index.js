@@ -1,14 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+
+// SO: redux hell starts here:
+import {
+    createStore, combineReducers,
+    compose, applyMiddleware
+} from "redux";
+import { Provider } from "react-redux";
+import { sessionService, sessionReducer } from "redux-react-session";
+import thunkMiddleware from "redux-thunk";
+
 import { BrowserRouter, } from 'react-router-dom'
 
 import App from './App';
 
-ReactDOM.render(
-    <BrowserRouter>
-        <div>
-            <App />
-        </div>
-    </BrowserRouter>,
+const reducer = combineReducers({
+    session: sessionReducer,
+});
+
+const store = createStore(reducer, undefined, compose(applyMiddleware(thunkMiddleware)));
+
+sessionService.initSessionService(store);
+
+render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
     document.getElementById('root')
 );

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Table, } from "react-bootstrap";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import axios from 'axios';
 
@@ -111,4 +114,16 @@ class Workers extends Component {
     }
 }
 
-export default Workers;
+const mapState = (state) => ({
+    user: state.session.user,
+    authenticated: state.session.authenticated
+});
+
+const mapDispatch = (dispatch) => {
+    return {
+        actions: bindActionCreators()
+    }
+}
+
+export default withRouter(connect(mapState, mapDispatch)(Workers));
+// export default Workers;
