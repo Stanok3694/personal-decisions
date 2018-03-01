@@ -1,11 +1,17 @@
 import moment from "moment";
 
 const formatDate = (unformattedDate) => {
-    return moment(unformattedDate, 'DD-MM-YYYY').format('L');
+    console.log('i am used - formatDate');
+    const result = moment(unformattedDate, 'DD-MM-YYYY').format('L');
+    console.log(`formatDate - ${result}`);
+    return result;
 }
 
 const formatDateForUI = (unformattedDate) => {
-    return moment(unformattedDate).format("DD.MM.YYYY");
+    console.log('i am used - formatDateForUI');
+    const result = moment(unformattedDate).format("DD.MM.YYYY");
+    console.log(`formatDateForUI - ${result}`);
+    return result;
 }
 
 const FormatDate = (unformattedDate) => {
