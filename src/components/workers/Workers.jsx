@@ -43,12 +43,18 @@ class Workers extends Component {
     }
 
     makeStringField = (postionArray) => {
-        const strFromArr = postionArray.toString();
-        const commaIdx = strFromArr.indexOf(',');
-        const withComma = strFromArr.slice(0, commaIdx + 1);
-        const afterComma = strFromArr.slice(commaIdx + 1);
-
-        return `${withComma} ${afterComma}`;
+        if (postionArray) {
+            const strFromArr = postionArray.toString();
+            const commaIdx = strFromArr.indexOf(',');
+            const withComma = strFromArr.slice(0, commaIdx + 1);
+            const afterComma = strFromArr.slice(commaIdx + 1);
+    
+            return `${withComma} ${afterComma}`;
+        } else {
+            return null;
+        }
+        
+            
     }
 
     render() {
@@ -80,7 +86,6 @@ class Workers extends Component {
                                     const route = `/worker/${w.id}`;
                                     // SO: move into separate file?
                                     const specialty = this.makeStringField(w.position);
-                                    const status = w.inShift ? 'В смене' : 'Не в смене';
 
                                     return (
                                         <tr key={index}>
@@ -92,7 +97,7 @@ class Workers extends Component {
                                             <td>{w.age}</td>
                                             <td>{w.district}</td>
                                             <td>{specialty}</td>
-                                            <td>{status}</td>
+                                            <td>{w.status}</td>
                                             <td>{w.phoneNumber}</td>
                                             <td>{w.notes}</td>
                                         </tr>
