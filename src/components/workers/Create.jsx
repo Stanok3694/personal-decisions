@@ -95,8 +95,8 @@ class CreateWorker extends Component {
                 }).then(response => {
                     const workerData = response.data;
                     // SO: can i format date more elegant?
-                    workerData.dateOfBirth = FormatDate(workerData.dateOfBirth).forUI;
-                    workerData.passportStartDate = FormatDate(workerData.passportStartDate).forUI;
+                    workerData.dateOfBirth = workerData.dateOfBirth ? FormatDate(workerData.dateOfBirth).forUI : null;
+                    workerData.passportStartDate = workerData.dateOfBirth ? FormatDate(workerData.passportStartDate).forUI : null;
                     
                     this.setState({
                         ...workerData,
