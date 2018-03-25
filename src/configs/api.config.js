@@ -10,4 +10,13 @@ const apiConfigSwitcher = () => {
     return apiConfig.whichEnv === 'dev' ? apiConfig.dev : apiConfig.prod;
 }
 
-export default apiConfigSwitcher;
+const ApiRoutes = {
+    getAllWorkers: `${apiConfigSwitcher()}workers/getAllWorkers`,
+    getWorkerById: `${apiConfigSwitcher()}workers/getWorkerById`,
+    deleteWorkerById: `${apiConfigSwitcher()}workers/deleteWorkerById?workerId=`,
+    updateWorkerById: `${apiConfigSwitcher()}workers/updateWorkerById`,
+    createWorker: `${apiConfigSwitcher()}workers/createWorker`,
+    getRawWorkerById: `${apiConfigSwitcher()}workers/getRawWorkerById`,
+}
+
+export default ApiRoutes;

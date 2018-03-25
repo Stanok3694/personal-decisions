@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import { FormControl, ListGroup, ListGroupItem, Grid, Col, Row, } from "react-bootstrap";
 import axios from "axios";
 
-import { CustomActionButton } from "./workerProfile";
-import { WaitForResponse } from "../service";
-import { FormatDate } from "../../utils";
-import apiConfigSwitcher from "../../configs/api.config";
+import { CustomNavigationButton, WaitForResponse, } from "../../UI";
+import { FormatDate } from "../../../utils";
+import { ApiRoutes } from "../../../configs";
 
-class CreateWorker extends Component {
+class WorkerForm extends Component {
     static BASE_DATA_INPUTS = [
         {
             key: "order",
@@ -93,7 +92,7 @@ class CreateWorker extends Component {
         const workerId = this.props.match.params.workerId;
 
         if (workerId) {
-            axios.post(`${apiConfigSwitcher()}workers/getRawWorkerById`,
+            axios.post(ApiRoutes.getRawWorkerById,
                 {
                     workerId,
                 }).then(response => {
@@ -158,7 +157,7 @@ class CreateWorker extends Component {
             updatedFields.payments = updatedFields.payments ? updatedFields.payments.split(',') : null;
             updatedFields.works = updatedFields.works ? updatedFields.works.split(',') : null;
 
-            axios.put(`${apiConfigSwitcher()}workers/updateWorkerById`, {
+            axios.put(ApiRoutes.updateWorkerById, {
                     workerId,
                     updatedFields
                 }).then(response => {
@@ -168,7 +167,7 @@ class CreateWorker extends Component {
                     return;
                 });
         } else {
-            axios.post(`${apiConfigSwitcher()}workers/createWorker`, workerData)
+            axios.post(ApiRoutes.createWorker, workerData)
                 .then(response => {
                     cb();
                 }).catch(e => {
@@ -203,7 +202,7 @@ class CreateWorker extends Component {
                             <Col md={6}>
                                 <ListGroup>
                                     {
-                                        CreateWorker.BASE_DATA_INPUTS.map((i, index) => {
+                                        WorkerForm.BASE_DATA_INPUTS.map((i, index) => {
                                             return (
                                                 <ListGroupItem key={index}>
                                                     <div>
@@ -231,7 +230,7 @@ class CreateWorker extends Component {
                                         </div>
                                     </ListGroupItem>
                                     <br />
-                                    <CustomActionButton
+                                    <CustomNavigationButton
                                         name={this.whichFlowName()}
                                         bsStyle="success"
                                         bsSize="small"
@@ -243,7 +242,7 @@ class CreateWorker extends Component {
                             <Col md={6}>
                                 <ListGroup>
                                     {
-                                        CreateWorker.PASS_DATA_INPUTS.map((i, index) => {
+                                        WorkerForm.PASS_DATA_INPUTS.map((i, index) => {
                                             return (
                                                 <ListGroupItem key={index}>
                                                     <div>
@@ -269,4 +268,4 @@ class CreateWorker extends Component {
     }
 }
 
-export default CreateWorker;
+export default WorkerForm;

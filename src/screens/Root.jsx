@@ -2,10 +2,11 @@ import React from 'react';
 import { Link, Route, Switch } from "react-router-dom";
 import { Navbar, Nav, NavItem, NavDropdown } from "react-bootstrap";
 
-import { Workers, Profile, Create } from './components/workers';
-import Dashboard from './components/Dashboard';
+import {WorkersProfile, WorkersForm } from '../components/Workers';
+import { Dashboard } from '../components/Dashboard';
+import { ScreensWorkers } from "./";
 
-const App = () => (
+const ScreensRoot = () => (
 	<div>
 		{/* menu frame: */}
 		<Navbar>
@@ -29,13 +30,13 @@ const App = () => (
 		<div>
 			<Switch>
 				<Route exact path="/" component={Dashboard} />
-				<Route path="/workers" component={Workers} />
-				<Route path="/createWorker" component={Create} />
-				<Route path="/worker/:workerId" component={Profile} />
-				<Route path="/changeWorker/:workerId" component={Create} />
+				<Route path="/workers" component={ScreensWorkers} />
+				<Route path="/createWorker" component={WorkersForm} />
+				<Route path="/worker/:workerId" component={WorkersProfile} />
+				<Route path="/changeWorker/:workerId" component={WorkersForm} />
 			</Switch>
 		</div>
 	</div>
 );
 
-export default App;
+export default ScreensRoot;
